@@ -70,13 +70,12 @@ function Products() {
 
   // Repete os produtos cadastrados para reproduzir a quantidade
   // de cards exibida no layout de referência.
-  const displayProducts = Array.from(
-    { length: 15 },
-    (_, index) => ({
-      ...filteredProducts[index % filteredProducts.length],
-      id: `listing-${index}`,
-    })
-  ).filter((product) => product.name);
+ const displayProducts = Array.from(
+  { length: 15 },
+  (_, index) => ({
+    ...filteredProducts[index % filteredProducts.length],
+  })
+).filter((product) => product);
 
   return (
     <main className="products-page">
