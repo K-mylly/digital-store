@@ -1,0 +1,154 @@
+
+.header {
+  background: var(--white);
+  width: 100%;
+}
+
+.header-main {
+  min-height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--primary);
+  font-size: 22px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.logo svg {
+  background: var(--primary);
+  color: white;
+  border-radius: 4px;
+  padding: 3px;
+}
+
+.search-box {
+  background: #F5F5F5;
+  height: 40px;
+  max-width: 500px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  border-radius: 6px;
+  padding: 0 12px;
+}
+
+.search-box input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 12px;
+}
+
+.search-box button {
+  border: none;
+  background: transparent;
+  color: #999;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.register-link {
+  font-size: 12px;
+  text-decoration: underline;
+  color: #555;
+}
+
+.login-button {
+  background: var(--primary);
+  color: white;
+  padding: 11px 30px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.cart-button {
+  color: var(--primary);
+  position: relative;
+}
+
+.cart-count {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  font-size: 9px;
+  font-weight: bold;
+}
+
+.navigation {
+  height: 35px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.navigation a {
+  font-size: 12px;
+  color: #555;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.navigation a.active {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.navigation a.active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--primary);
+}
+
+@media (max-width: 700px) {
+  .header-main {
+    flex-wrap: wrap;
+    padding: 15px 0;
+    gap: 15px;
+  }
+
+  .search-box {
+    order: 3;
+    flex-basis: 100%;
+    max-width: none;
+  }
+
+  .header-actions {
+    gap: 12px;
+  }
+
+  .register-link {
+    display: none;
+  }
+
+  .login-button {
+    padding: 9px 15px;
+  }
+
+  .navigation {
+    gap: 18px;
+    overflow-x: auto;
+  }
+
+  .navigation a {
+    white-space: nowrap;
+  }
+}
