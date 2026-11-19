@@ -14,11 +14,11 @@ import ProductGrid from "../components/ProductGrid";
 import "../styles/home.css";
 
 const categories = [
-  { name: "Camisetas", icon: Shirt },
-  { name: "Calças", icon: GalleryVerticalEnd },
-  { name: "Bonés", icon: GalleryVerticalEnd },
-  { name: "Headphones", icon: Headphones },
-  { name: "Tênis", icon: Footprints },
+  { name: "Camisetas", slug: "camisetas", icon: Shirt },
+  { name: "Calças", slug: "calcas", icon: GalleryVerticalEnd },
+  { name: "Bonés", slug: "bones", icon: GalleryVerticalEnd },
+  { name: "Headphones", slug: "headphones", icon: Headphones },
+  { name: "Tênis", slug: "tenis", icon: Footprints },
 ];
 
 function Home() {
@@ -101,10 +101,10 @@ function Home() {
 
             return (
               <Link
-                to="/produtos"
-                className="category-item"
-                key={category.name}
-              >
+  to={`/colecoes/${category.slug}`}
+  className="category-item"
+  key={category.name}
+>
                 <div className="category-icon">
                   <Icon size={34} strokeWidth={1.2} />
                 </div>
