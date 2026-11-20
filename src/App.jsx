@@ -7,20 +7,23 @@ import Collections from "./pages/Collections";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import { CartProvider } from "./context/CartContext";
 
 function App() {
   return (
     <BrowserRouter>
-      <Header />
+      <CartProvider>
+        <Header />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/produtos" element={<Products />} />
-        <Route path="/produto/:id" element={<ProductDetails />} />
-        <Route path="/colecoes/:categoria" element={<Collections />} />
-      </Routes>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/produtos" element={<Products />} />
+          <Route path="/produto/:id" element={<ProductDetails />} />
+          <Route path="/colecoes/:categoria" element={<Collections />} />
+        </Routes>
 
-      <Footer />
+        <Footer />
+      </CartProvider>
     </BrowserRouter>
   );
 }
