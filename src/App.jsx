@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Products from "./pages/Products";
 import ProductDetails from "./pages/ProductDetails";
 import Collections from "./pages/Collections";
+import Cart from "./pages/Cart";
 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -27,6 +28,7 @@ function App() {
           <Route path="/produtos" element={<Products />} />
           <Route path="/produto/:id" element={<ProductDetails />} />
           <Route path="/colecoes/:categoria" element={<Collections />} />
+          <Route path="/carrinho" element={<Cart />} />
 
           {/* Autenticação e cadastro */}
           <Route path="/login" element={<Login />} />

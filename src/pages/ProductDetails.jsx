@@ -123,14 +123,18 @@ function ProductDetails() {
 
           <div className="product-purchase">
 
-            <button
-  className="buy-button"
-  onClick={() => addToCart(product)}
->
-  COMPRAR
-</button>
+  <button className="buy-button">
+    COMPRAR
+  </button>
 
-          </div>
+  <button
+    className="add-cart-button"
+    onClick={() => addToCart(product)}
+  >
+    ADICIONAR AO CARRINHO
+  </button>
+
+</div>
 
         </div>
 

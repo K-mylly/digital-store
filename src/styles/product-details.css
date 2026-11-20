@@ -160,26 +160,46 @@
 
 /* Botão de compra */
 
+/* Botões de compra */
+
 .product-purchase {
   margin-top: 25px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
-.buy-button {
+.buy-button,
+.add-cart-button {
   width: 200px;
+  min-width: 200px;
   padding: 14px;
   border: none;
   border-radius: 5px;
-  background: #ffae16;
   color: white;
   font-weight: bold;
   cursor: pointer;
   transition: 0.3s;
 }
 
+.buy-button {
+  background: #ffae16;
+}
+
 .buy-button:hover {
   background: #ed9700;
 }
 
+.add-cart-button {
+  background: var(--primary);
+  white-space: nowrap;
+  font-size: 11px;
+}
+
+.add-cart-button:hover {
+  opacity: 0.85;
+}
 /* Produtos relacionados */
 
 .related-products {
@@ -244,4 +264,5 @@
   .breadcrumb {
     flex-wrap: wrap;
   }
+  
 }
