@@ -1,0 +1,136 @@
+.register-form-page {
+  min-height: 900px;
+  background: #f9f8fe;
+  padding: 45px 20px 100px;
+}
+
+.register-form-container {
+  width: 100%;
+  max-width: 517px;
+  margin: 0 auto;
+}
+
+.register-form-container h1 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1f1f1f;
+  margin-bottom: 13px;
+}
+
+.register-form-card {
+  background: #ffffff;
+  padding: 24px 21px 20px;
+  border-radius: 3px;
+  margin-bottom: 7px;
+}
+
+.register-form-card h2 {
+  font-size: 11px;
+  font-weight: 700;
+  color: #555555;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #dddddd;
+  margin-bottom: 16px;
+}
+
+.register-form-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 17px;
+}
+
+.register-form-field:last-child {
+  margin-bottom: 0;
+}
+
+.register-form-field label {
+  font-size: 9px;
+  font-weight: 700;
+  color: #555555;
+  margin-bottom: 7px;
+}
+
+.register-form-field input {
+  width: 100%;
+  height: 42px;
+  background: #f5f5f5;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  padding: 0 10px;
+  font-size: 12px;
+  color: #333333;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.register-form-field input::placeholder {
+  color: #aaaaaa;
+}
+
+.register-form-field input:focus {
+  border-color: var(--primary);
+}
+
+.register-form-field input[readonly] {
+  color: #777777;
+  cursor: not-allowed;
+}
+
+.register-newsletter {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 20px 0 25px;
+  color: #555555;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.register-newsletter input {
+  width: 15px;
+  height: 15px;
+  margin: 0;
+  accent-color: var(--primary);
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.register-form-button {
+  width: 100%;
+  height: 43px;
+  background: var(--primary);
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.register-form-button:hover {
+  background: var(--primary-dark);
+}
+
+.register-form-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.register-form-error {
+  color: #d32f2f;
+  font-size: 12px;
+  margin: -10px 0 15px;
+}
+
+@media (max-width: 600px) {
+  .register-form-page {
+    padding: 30px 15px 60px;
+  }
+
+  .register-form-card {
+    padding: 20px 15px;
+  }
+}
