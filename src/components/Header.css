@@ -152,3 +152,36 @@
     white-space: nowrap;
   }
 }
+.user-welcome {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  color: #555;
+}
+
+.user-welcome strong {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.logout-button {
+  background: transparent;
+  border: none;
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  text-decoration: underline;
+}
+.header-auth .header-main {
+  min-height: 70px;
+  justify-content: flex-start;
+}
+
+.header-auth .logo {
+  margin-right: auto;
+}
