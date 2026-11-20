@@ -4,11 +4,13 @@ import { useState } from "react";
 
 import products from "../data/products";
 import ProductCard from "../components/ProductCard";
+import { useCart } from "../context/CartContext";
 
 import "../styles/product-details.css";
 
 function ProductDetails() {
   const { id } = useParams();
+  const { addToCart } = useCart();
 
   // Busca o produto pelo ID da URL
   const product = products.find(
@@ -121,9 +123,12 @@ function ProductDetails() {
 
           <div className="product-purchase">
 
-            <button className="buy-button">
-              COMPRAR
-            </button>
+            <button
+  className="buy-button"
+  onClick={() => addToCart(product)}
+>
+  COMPRAR
+</button>
 
           </div>
 

@@ -8,21 +8,32 @@ import {
 } from "lucide-react";
 
 import { supabase } from "../supabaseClient";
+import { useCart } from "../context/CartContext";
 import "./Header.css";
 
 function Header() {
   const location = useLocation();
   const isLoginPage = location.pathname === "/login";
 
+  // Autenticação
   const [user, setUser] = useState(null);
 
+  // Carrinho
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
+  const {
+    cartCount,
+    cartItems,
+    cartTotal,
+    clearCart
+  } = useCart();
+
+  // Verifica e acompanha o usuário conectado
   useEffect(() => {
-    // Verifica se já existe alguém conectado
     supabase.auth.getSession().then(({ data }) => {
       setUser(data.session?.user ?? null);
     });
 
-    // Acompanha alterações na autenticação
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -32,6 +43,7 @@ function Header() {
     return () => subscription.unsubscribe();
   }, []);
 
+  // Sai da conta
   async function handleLogout() {
     const { error } = await supabase.auth.signOut();
 
@@ -60,6 +72,7 @@ function Header() {
                 type="text"
                 placeholder="Pesquisar produto..."
               />
+
               <button type="submit" aria-label="Pesquisar">
                 <Search size={19} />
               </button>
@@ -67,6 +80,7 @@ function Header() {
 
             <div className="header-actions">
 
+              {/* Autenticação */}
               {user ? (
                 <div className="user-welcome">
                   <span>
@@ -93,10 +107,84 @@ function Header() {
                 </>
               )}
 
-              <Link to="/carrinho" className="cart-button">
-                <ShoppingCart size={22} />
-                <span className="cart-count">0</span>
-              </Link>
+              {/* Carrinho */}
+              <div className="cart-wrapper">
+                <button
+                  type="button"
+                  className="cart-button"
+                  onClick={() => setIsCartOpen(!isCartOpen)}
+                >
+                  <ShoppingCart size={22} />
+
+                  <span className="cart-count">
+                    {cartCount}
+                  </span>
+                </button>
+
+                {isCartOpen && (
+                  <div className="cart-popup">
+                    <h3>Meu carrinho</h3>
+
+                    {cartItems.length === 0 ? (
+                      <p>Seu carrinho está vazio.</p>
+                    ) : (
+                      <>
+                        <div className="cart-popup-items">
+                          {cartItems.map((item, index) => (
+                            <div
+                              className="cart-popup-item"
+                              key={`${item.id}-${index}`}
+                            >
+                              <img
+                                src={item.image}
+                                alt={item.name}
+                              />
+
+                              <div>
+                                <strong>{item.name}</strong>
+
+                                <span>
+                                  {item.price.toLocaleString("pt-BR", {
+                                    style: "currency",
+                                    currency: "BRL",
+                                  })}
+                                </span>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+
+                        <div className="cart-popup-total">
+                          <strong>Total:</strong>
+
+                          <strong>
+                            {cartTotal.toLocaleString("pt-BR", {
+                              style: "currency",
+                              currency: "BRL",
+                            })}
+                          </strong>
+                        </div>
+
+                        <div className="cart-popup-actions">
+                          <button
+                            className="cart-clear-button"
+                            onClick={clearCart}
+                          >
+                            Esvaziar
+                          </button>
+
+                          <Link
+                            to="/carrinho"
+                            className="cart-view-button"
+                          >
+                            Ver Carrinho
+                          </Link>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                )}
+              </div>
 
             </div>
           </>
