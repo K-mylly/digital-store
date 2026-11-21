@@ -1,0 +1,160 @@
+
+.my-orders-page {
+  min-height: 100vh;
+  background: #f8f7fc;
+  padding: 50px 0 60px;
+}
+
+.my-orders-container {
+  width: 86%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 210px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+}
+
+/* Menu lateral */
+.profile-menu {
+  background: #fff;
+  padding: 20px;
+}
+
+.profile-menu h3 {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.profile-menu nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-menu nav a {
+  text-decoration: none;
+  color: #555;
+  font-size: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid #ddd;
+  transition: 0.2s;
+}
+
+.profile-menu nav a:hover,
+.profile-menu nav a.active {
+  color: #c92071;
+  font-weight: bold;
+}
+
+/* Lista de pedidos */
+.orders-content {
+  background: #fff;
+  padding: 20px;
+}
+
+.orders-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.orders-header h3,
+.orders-header span {
+  font-size: 12px;
+  color: #333;
+  font-weight: 600;
+}
+
+.orders-header span {
+  font-weight: normal;
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.order-product {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.order-product img {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+  background: #e8e8ff;
+  border-radius: 3px;
+  padding: 5px;
+}
+
+.order-product div {
+  min-width: 0;
+}
+
+.order-product div span {
+  display: block;
+  font-size: 9px;
+  color: #999;
+  margin-bottom: 4px;
+}
+
+.order-product h4 {
+  font-size: 11px;
+  color: #333;
+  font-weight: 600;
+}
+
+.order-status {
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.order-status.in-transit {
+  color: #f5a000;
+}
+
+.order-status.finished {
+  color: #999;
+}
+
+.order-status.canceled {
+  color: #e73550;
+}
+
+/* Responsividade */
+@media (max-width: 700px) {
+  .my-orders-container {
+    width: 92%;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .order-item {
+    gap: 8px;
+  }
+
+  .order-product h4 {
+    font-size: 10px;
+  }
+
+  .order-status {
+    font-size: 9px;
+  }
+
+  .orders-content {
+    padding: 15px;
+  }
+}
