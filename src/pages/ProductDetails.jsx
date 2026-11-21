@@ -1,5 +1,5 @@
 
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 import products from "../data/products";
@@ -9,6 +9,7 @@ import { useCart } from "../context/CartContext";
 import "../styles/product-details.css";
 
 function ProductDetails() {
+  const navigate = useNavigate();
   const { id } = useParams();
   const { addToCart } = useCart();
 
@@ -18,6 +19,16 @@ function ProductDetails() {
   );
 
   const [selectedImage, setSelectedImage] = useState(0);
+
+  // Compra direta
+  function handleBuyNow() {
+    navigate("/finalizar-compra", {
+      state: {
+        product: product,
+        quantity: 1,
+      },
+    });
+  }
 
   // Produto não encontrado
   if (!product) {
@@ -69,7 +80,8 @@ function ProductDetails() {
 
           <div className="product-thumbnails">
             <button
-              className="thumbnail active"
+              type="button"
+              className={`thumbnail ${selectedImage === 0 ? "active" : ""}`}
               onClick={() => setSelectedImage(0)}
             >
               <img
@@ -96,14 +108,14 @@ function ProductDetails() {
           </div>
 
           <div className="product-prices">
-  <span className="old-price">
-    R$ {product.oldPrice.toFixed(2).replace(".", ",")}
-  </span>
+            <span className="old-price">
+              {formatPrice(product.oldPrice)}
+            </span>
 
-  <strong>
-    R$ {product.price.toFixed(2).replace(".", ",")}
-  </strong>
-</div>
+            <strong>
+              {formatPrice(product.price)}
+            </strong>
+          </div>
 
           {product.discount > 0 && (
             <span className="detail-discount">
@@ -124,11 +136,20 @@ function ProductDetails() {
           <div className="product-purchase">
 
             <button
-  className="buy-button"
-  onClick={() => addToCart(product)}
->
-  COMPRAR
-</button>
+              type="button"
+              className="buy-button"
+              onClick={handleBuyNow}
+            >
+              COMPRAR
+            </button>
+
+            <button
+              type="button"
+              className="add-cart-button"
+              onClick={() => addToCart(product)}
+            >
+              ADICIONAR AO CARRINHO
+            </button>
 
           </div>
 

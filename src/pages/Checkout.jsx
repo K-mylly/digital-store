@@ -1,19 +1,54 @@
 
+import { useLocation, Link } from "react-router-dom";
+import { useCart } from "../context/CartContext";
+
 import "../styles/checkout.css";
 
 function Checkout() {
+  const location = useLocation();
+  const { cartItems } = useCart();
+
+  // Verifica se o usuário veio diretamente de um produto
+  const selectedProduct = location.state?.product;
+
+  // Se veio de um produto, mostra apenas ele.
+  // Caso contrário, utiliza os produtos do carrinho.
+  const checkoutItems = selectedProduct
+    ? [{ ...selectedProduct, quantity: location.state.quantity || 1 }]
+    : cartItems;
+
+  const subtotal = checkoutItems.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
+
+  const formatPrice = (price) =>
+    price.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    });
+
+  if (checkoutItems.length === 0) {
+    return (
+      <main className="checkout-page">
+        <div className="checkout-container">
+          <h1>Nenhum produto selecionado</h1>
+          <p>Adicione um produto antes de finalizar sua compra.</p>
+          <Link to="/produtos">Voltar para produtos</Link>
+        </div>
+      </main>
+    );
+  }
+
   return (
     <main className="checkout-page">
       <div className="checkout-container">
-
         <h1>Finalizar Compra</h1>
 
         <div className="checkout-content">
 
-          {/* COLUNA ESQUERDA */}
           <div className="checkout-forms">
 
-            {/* INFORMAÇÕES PESSOAIS */}
             <section className="checkout-card">
               <h2>Informações Pessoais</h2>
 
@@ -38,7 +73,6 @@ function Checkout() {
               </div>
             </section>
 
-            {/* INFORMAÇÕES DE ENTREGA */}
             <section className="checkout-card">
               <h2>Informações de Entrega</h2>
 
@@ -68,7 +102,6 @@ function Checkout() {
               </div>
             </section>
 
-            {/* INFORMAÇÕES DE PAGAMENTO */}
             <section className="checkout-card">
               <h2>Informações de Pagamento</h2>
 
@@ -77,12 +110,21 @@ function Checkout() {
 
                 <div className="payment-options">
                   <label>
-                    <input type="radio" name="payment" value="credit" defaultChecked />
+                    <input
+                      type="radio"
+                      name="payment"
+                      value="credit"
+                      defaultChecked
+                    />
                     Cartão de Crédito
                   </label>
 
                   <label>
-                    <input type="radio" name="payment" value="boleto" />
+                    <input
+                      type="radio"
+                      name="payment"
+                      value="boleto"
+                    />
                     Boleto Bancário
                   </label>
                 </div>
@@ -111,13 +153,12 @@ function Checkout() {
               </div>
             </section>
 
-            {/* FINALIZAÇÃO */}
             <section className="checkout-card checkout-final">
               <h2>Finalizar Compra</h2>
 
               <div className="checkout-final-total">
                 <strong>Total</strong>
-                <strong>R$ 219,00</strong>
+                <strong>{formatPrice(subtotal)}</strong>
               </div>
 
               <button type="button" className="checkout-button">
@@ -127,25 +168,25 @@ function Checkout() {
 
           </div>
 
-          {/* COLUNA DIREITA: RESUMO */}
           <aside className="checkout-summary">
             <h2>RESUMO</h2>
 
-            <div className="summary-product">
-              <img
-                src="/images/nike-air-force.png"
-                alt="Tênis"
-              />
+            {checkoutItems.map((item) => (
+              <div className="summary-product" key={item.id}>
+                <img src={item.image} alt={item.name} />
 
-              <strong>
-                Tênis Nike Revolution 6 Next Nature Masculino
-              </strong>
-            </div>
+                <div>
+                  <strong>{item.name}</strong>
+                  <p>Quantidade: {item.quantity}</p>
+                  <p>{formatPrice(item.price * item.quantity)}</p>
+                </div>
+              </div>
+            ))}
 
             <div className="summary-values">
               <div>
                 <span>Subtotal:</span>
-                <span>R$ 249,00</span>
+                <span>{formatPrice(subtotal)}</span>
               </div>
 
               <div>
@@ -155,7 +196,7 @@ function Checkout() {
 
               <div>
                 <span>Desconto:</span>
-                <span>R$ 30,00</span>
+                <span>R$ 0,00</span>
               </div>
             </div>
 
@@ -163,8 +204,8 @@ function Checkout() {
               <strong>Total</strong>
 
               <div>
-                <strong>R$ 219,00</strong>
-                <small>ou 10x de R$ 21,90 sem juros</small>
+                <strong>{formatPrice(subtotal)}</strong>
+                <small>Valor demonstrativo</small>
               </div>
             </div>
 
