@@ -6,6 +6,7 @@ import Products from "./pages/Products";
 import ProductDetails from "./pages/ProductDetails";
 import Collections from "./pages/Collections";
 import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -28,7 +29,10 @@ function App() {
           <Route path="/produtos" element={<Products />} />
           <Route path="/produto/:id" element={<ProductDetails />} />
           <Route path="/colecoes/:categoria" element={<Collections />} />
+
+          {/* Carrinho e finalização de compra */}
           <Route path="/carrinho" element={<Cart />} />
+          <Route path="/finalizar-compra" element={<Checkout />} />
 
           {/* Autenticação e cadastro */}
           <Route path="/login" element={<Login />} />
